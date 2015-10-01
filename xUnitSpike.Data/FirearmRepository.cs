@@ -7,7 +7,7 @@ namespace xUnitSpike.Data
 {
     public class FirearmRepository : IFirearmRepository
     {
-        private readonly IQueryable<Firearm> _firearms = new List<Firearm>
+        private readonly IList<Firearm> _firearms = new List<Firearm>
         {
             new Firearm { Identifier = "FR0123456789", SerialNumber1 = "0123456789", SerialNumber2 = "0123456789" },
             new Firearm { Identifier = "FR9876543210", SerialNumber1 = "9876543210", SerialNumber2 = "9876543210" },
@@ -20,16 +20,23 @@ namespace xUnitSpike.Data
             new Firearm { Identifier = "FR7777777777", SerialNumber1 = "7777777777", SerialNumber2 = "7777777777" },
             new Firearm { Identifier = "FR8888888888", SerialNumber1 = "8888888888", SerialNumber2 = "8888888888" },
             new Firearm { Identifier = "FR9999999999", SerialNumber1 = "9999999999", SerialNumber2 = "9999999999" }
-        }.AsQueryable();
+        };
 
         public IQueryable<Firearm> GetAll()
         {
-            return _firearms;
+            return _firearms.AsQueryable();
         }
 
         public Firearm GetByIdentifier(string identifier)
         {
             return _firearms.Single(f => f.Identifier == identifier);
+        }
+
+        public string Save(Firearm firearm)
+        {
+            _firearms.Add(firearm);
+
+            return firearm.Identifier;
         }
     }
 }

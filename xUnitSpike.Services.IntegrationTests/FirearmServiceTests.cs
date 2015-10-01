@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
 using Microsoft.Practices.Unity;
+using Ploeh.AutoFixture;
 using xUnitSpike.Domain;
 using xUnitSpike.Services.Interfaces;
 using xUnitSpike.Tests;
@@ -38,6 +39,23 @@ namespace xUnitSpike.Services.IntegrationTests
 
             // Assert
             firearm.Should().NotBeNull();
+        }
+
+        [Fact]
+        public void Save_WithFirearm_SavesFirearmToDatabase()
+        {
+            // Arrange
+            Firearm firearm = Fixture.Create<Firearm>();
+
+            // Act
+            string identifier = _firearmService.Save(firearm);
+
+            // Assert
+            identifier.Should().NotBeNullOrWhiteSpace();
+            identifier.Should().Be(firearm.Identifier);
+
+            Firearm createdFirearm = _firearmService.GetByIdentifier(identifier);
+            createdFirearm.ShouldBeEquivalentTo(firearm);
         }
     }
 }

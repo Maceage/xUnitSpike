@@ -8,5 +8,7 @@ namespace xUnitSpike.Data.Interfaces
         IQueryable<Firearm> GetAll();
 
         Firearm GetByIdentifier(string identifier);
+
+        string Save(Firearm firearm);
     }
 }

@@ -6,7 +6,7 @@ namespace xUnitSpike.Data.Mapping.Profiles
     {
         protected override void Configure()
         {
-            Mapper.CreateMap<Entities.Firearm, Domain.Firearm>();
+            Mapper.CreateMap<Entities.Firearm, Domain.Firearm>().ReverseMap();
         }
     }
 }

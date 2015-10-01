@@ -42,7 +42,7 @@ namespace xUnitSpike.Services.UnitTests
         }
 
         [Fact]
-        public void Get_WithFirearmIdentifier_CallsRepository()
+        public void Get_WithFirearmIdentifier_ReturnsFirearmWithIdentifier()
         {
             // Arrange
             string identifier = Fixture.Create<string>();
@@ -59,6 +59,23 @@ namespace xUnitSpike.Services.UnitTests
             actual.ShouldBeEquivalentTo(expected, o => o.IncludingProperties());
 
             A.CallTo(() => _firearmRepository.GetByIdentifier(A<string>.That.IsEqualTo(identifier))).MustHaveHappened();
+        }
+
+        [Fact]
+        public void Save_WithFirearm_SavesToRepository()
+        {
+            // Arrange
+            string expected = Fixture.Create<string>();
+
+            Domain.Firearm firearm = Fixture.Create<Domain.Firearm>();
+
+            A.CallTo(() => _firearmRepository.Save(A<Firearm>._)).Returns(expected);
+
+            // Act
+            string actual = _firearmService.Save(firearm);
+
+            // Assert
+            actual.Should().Be(expected);
         }
     }
 }
