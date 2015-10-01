@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using xUnitSpike.Data.Entities;
+using xUnitSpike.Domain;
 
 namespace xUnitSpike.Data.Mapping.Profiles
 {
@@ -6,7 +8,7 @@ namespace xUnitSpike.Data.Mapping.Profiles
     {
         protected override void Configure()
         {
-            Mapper.CreateMap<Entities.Firearm, Domain.Firearm>().ReverseMap();
+            Mapper.CreateMap<FirearmEntity, Firearm>().ReverseMap();
         }
     }
 }

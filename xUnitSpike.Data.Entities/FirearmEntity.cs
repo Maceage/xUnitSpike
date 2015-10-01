@@ -1,6 +1,6 @@
 ﻿namespace xUnitSpike.Data.Entities
 {
-    public class Firearm
+    public class FirearmEntity
     {
         public string Identifier { get; set; }
         public string SerialNumber1 { get; set; }

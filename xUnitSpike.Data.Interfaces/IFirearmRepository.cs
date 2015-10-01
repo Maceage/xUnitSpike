@@ -5,11 +5,11 @@ namespace xUnitSpike.Data.Interfaces
 {
     public interface IFirearmRepository
     {
-        IQueryable<Firearm> GetAll();
-        Firearm GetByIdentifier(string identifier);
+        IQueryable<FirearmEntity> GetAll();
+        FirearmEntity GetByIdentifier(string identifier);
 
-        string Save(Firearm firearm);
+        string Save(FirearmEntity firearmEntity);
 
-        bool Delete(Firearm firearm);
+        bool Delete(FirearmEntity firearmEntity);
     }
 }

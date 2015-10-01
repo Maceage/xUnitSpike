@@ -27,7 +27,7 @@ namespace xUnitSpike.Services.UnitTests
         public void GetAll_WhenCalled_ReturnsAllFirearms()
         {
             // Arrange
-            IQueryable<Firearm> firearms = Fixture.CreateMany<Firearm>().AsQueryable();
+            IQueryable<FirearmEntity> firearms = Fixture.CreateMany<FirearmEntity>().AsQueryable();
             var expected = Mapper.Map<IEnumerable<Domain.Firearm>>(firearms);
 
             A.CallTo(() => _firearmRepository.GetAll()).Returns(firearms);
@@ -47,10 +47,10 @@ namespace xUnitSpike.Services.UnitTests
             // Arrange
             string identifier = Fixture.Create<string>();
 
-            Firearm firearm = Fixture.Create<Firearm>();
-            var expected = Mapper.Map<Domain.Firearm>(firearm);
+            FirearmEntity firearmEntity = Fixture.Create<FirearmEntity>();
+            var expected = Mapper.Map<Domain.Firearm>(firearmEntity);
 
-            A.CallTo(() => _firearmRepository.GetByIdentifier(A<string>.That.IsEqualTo(identifier))).ReturnsLazily(f => firearm);
+            A.CallTo(() => _firearmRepository.GetByIdentifier(A<string>.That.IsEqualTo(identifier))).ReturnsLazily(f => firearmEntity);
 
             // Act
             var actual = _firearmService.GetByIdentifier(identifier);
@@ -69,7 +69,7 @@ namespace xUnitSpike.Services.UnitTests
 
             Domain.Firearm firearm = Fixture.Create<Domain.Firearm>();
 
-            A.CallTo(() => _firearmRepository.Save(A<Firearm>._)).Returns(expected);
+            A.CallTo(() => _firearmRepository.Save(A<FirearmEntity>._)).Returns(expected);
 
             // Act
             string actual = _firearmService.Save(firearm);
@@ -84,7 +84,7 @@ namespace xUnitSpike.Services.UnitTests
             // Arrange
             Domain.Firearm firearm = Fixture.Create<Domain.Firearm>();
 
-            A.CallTo(() => _firearmRepository.Delete(A<Firearm>._)).Returns(true);
+            A.CallTo(() => _firearmRepository.Delete(A<FirearmEntity>._)).Returns(true);
 
             // Act
             bool actual = _firearmService.Delete(firearm);

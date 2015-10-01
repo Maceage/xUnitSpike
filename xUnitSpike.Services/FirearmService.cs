@@ -31,14 +31,14 @@ namespace xUnitSpike.Services
 
         public string Save(Firearm firearm)
         {
-            var dataFirearm = Mapper.Map<Data.Entities.Firearm>(firearm);
+            var dataFirearm = Mapper.Map<Data.Entities.FirearmEntity>(firearm);
 
             return _firearmRepository.Save(dataFirearm);
         }
 
         public bool Delete(Firearm firearm)
         {
-            var dataFirearm = Mapper.Map<Data.Entities.Firearm>(firearm);
+            var dataFirearm = Mapper.Map<Data.Entities.FirearmEntity>(firearm);
 
             return _firearmRepository.Delete(dataFirearm);
         }
