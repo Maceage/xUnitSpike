@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using FakeItEasy;
@@ -62,6 +63,19 @@ namespace xUnitSpike.Services.UnitTests
             A.CallTo(() => _firearmRepository.GetByIdentifier(A<string>.That.IsEqualTo(identifier))).MustHaveHappened();
         }
 
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        [InlineData(" ")]
+        public void GetByIdentifier_WithInvalidFirearmIdentifier_ThrowsException(string identifier)
+        {
+            // Arrange
+            Action action = () => _firearmService.GetByIdentifier(identifier);
+
+            // Act/Assert
+            action.ShouldThrow<ArgumentNullException>();
+        }
+
         [Fact]
         public void Save_WithFirearm_SavesToRepository()
         {
@@ -79,6 +93,16 @@ namespace xUnitSpike.Services.UnitTests
         }
 
         [Fact]
+        public void Save_WithNullFirearm_ThrowsException()
+        {
+            // Arrange
+            Action action = () => _firearmService.Save(null);
+
+            // Act/Assert
+            action.ShouldThrow<ArgumentNullException>();
+        }
+
+        [Fact]
         public void Delete_WithFirearm_DeletesFromRepository()
         {
             // Arrange
@@ -91,6 +115,16 @@ namespace xUnitSpike.Services.UnitTests
 
             // Assert
             actual.Should().BeTrue();
+        }
+
+        [Fact]
+        public void Delete_WithNullFirearm_ThrowsException()
+        {
+            // Arrange
+            Action action = () => _firearmService.Delete(null);
+
+            // Act/Assert
+            action.ShouldThrow<ArgumentNullException>();
         }
     }
 }

@@ -49,19 +49,6 @@ namespace xUnitSpike.Data.IntegrationTests
             firearm.Identifier.Should().Be(identifier);
         }
 
-        [Theory]
-        [InlineData("")]
-        [InlineData(null)]
-        [InlineData(" ")]
-        public void GetByIdentifier_WithInvalidFirearmIdentifier_ThrowsException(string identifier)
-        {
-            // Arrange
-            Action action = () => _firearmRepository.GetByIdentifier(identifier);
-
-            // Act/Assert
-            action.ShouldThrow<ArgumentNullException>();
-        }
-
         [Fact]
         public void Save_WithFirearm_AddsFirearmToDatabase()
         {
@@ -73,16 +60,6 @@ namespace xUnitSpike.Data.IntegrationTests
 
             // Assert
             savedFirearm.Should().NotBeNull();
-        }
-
-        [Fact]
-        public void Save_WithNullFirearm_ThrowsException()
-        {
-            // Arrange
-            Action action = () => _firearmRepository.Save(null);
-
-            // Act/Assert
-            action.ShouldThrow<ArgumentNullException>();
         }
 
         [Fact]
@@ -115,16 +92,6 @@ namespace xUnitSpike.Data.IntegrationTests
 
             // Assert
             isDeleted.Should().BeFalse();
-        }
-
-        [Fact]
-        public void Delete_WithNullFirearm_ThrowsException()
-        {
-            // Arrange
-            Action action = () => _firearmRepository.Delete(null);
-
-            // Act/Assert
-            action.ShouldThrow<ArgumentNullException>();
         }
     }
 }

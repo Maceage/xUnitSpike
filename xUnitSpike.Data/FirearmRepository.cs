@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using xUnitSpike.Data.Entities;
 using xUnitSpike.Data.Interfaces;
@@ -30,21 +29,11 @@ namespace xUnitSpike.Data
 
         public FirearmEntity GetByIdentifier(string identifier)
         {
-            if (string.IsNullOrWhiteSpace(identifier))
-            {
-                throw new ArgumentNullException(nameof(identifier));
-            }
-
             return _firearms.Single(f => f.Identifier == identifier);
         }
 
         public FirearmEntity Save(FirearmEntity firearmEntity)
         {
-            if (firearmEntity == null)
-            {
-                throw new ArgumentNullException(nameof(firearmEntity));
-            }
-
             _firearms.Add(firearmEntity);
 
             return firearmEntity;
@@ -52,11 +41,6 @@ namespace xUnitSpike.Data
 
         public bool Delete(FirearmEntity firearmEntity)
         {
-            if (firearmEntity == null)
-            {
-                throw new ArgumentNullException(nameof(firearmEntity));
-            }
-
             var firearm = _firearms.Single(f => f.Identifier == firearmEntity.Identifier);
 
             _firearms.Remove(firearm);

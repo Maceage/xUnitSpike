@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AutoMapper;
 using xUnitSpike.Data.Entities;
 using xUnitSpike.Data.Interfaces;
@@ -25,6 +26,11 @@ namespace xUnitSpike.Services
 
         public Firearm GetByIdentifier(string identifier)
         {
+            if (string.IsNullOrWhiteSpace(identifier))
+            {
+                throw new ArgumentNullException(nameof(identifier));
+            }
+
             var firearm = _firearmRepository.GetByIdentifier(identifier);
 
             return Mapper.Map<Firearm>(firearm);
@@ -32,6 +38,11 @@ namespace xUnitSpike.Services
 
         public Firearm Save(Firearm firearm)
         {
+            if (firearm == null)
+            {
+                throw new ArgumentNullException(nameof(firearm));
+            }
+
             var firearmData = Mapper.Map<FirearmEntity>(firearm);
             var savedFirearm = _firearmRepository.Save(firearmData);
 
@@ -40,6 +51,11 @@ namespace xUnitSpike.Services
 
         public bool Delete(Firearm firearm)
         {
+            if (firearm == null)
+            {
+                throw new ArgumentNullException(nameof(firearm));
+            }
+
             var firearmData = Mapper.Map<FirearmEntity>(firearm);
 
             return _firearmRepository.Delete(firearmData);
