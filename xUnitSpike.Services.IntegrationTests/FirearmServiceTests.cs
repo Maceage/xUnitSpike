@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using Microsoft.Practices.Unity;
 using Ploeh.AutoFixture;
@@ -59,7 +60,7 @@ namespace xUnitSpike.Services.IntegrationTests
         }
 
         [Fact]
-        public void Delete_WithFirearm_DeletesFirearmFromDatabase()
+        public void Delete_WithExistingFirearm_DeletesFirearmFromDatabase()
         {
             // Arrange
             Firearm firearm = Fixture.Create<Firearm>();
@@ -72,6 +73,23 @@ namespace xUnitSpike.Services.IntegrationTests
 
             // Assert
             isDeleted.Should().BeTrue();
+        }
+
+        [Fact]
+        public void Delete_WithNonExistingFirearm_ThrowsException()
+        {
+            // Arrange
+            Firearm firearm = Fixture.Create<Firearm>();
+
+            bool isDeleted = false;
+
+            Action action = () => isDeleted = _firearmService.Delete(firearm);
+
+            // Act
+            action.ShouldThrow<Exception>();
+
+            // Assert
+            isDeleted.Should().BeFalse();
         }
     }
 }

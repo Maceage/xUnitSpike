@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnitSpike.Dependencies", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnitSpike.Dependencies.UnitTests", "xUnitSpike.Dependencies.UnitTests\xUnitSpike.Dependencies.UnitTests.csproj", "{45F550AA-FD8B-4203-BD63-F88D4EBE205F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnitSpike.Data.IntegrationTests", "xUnitSpike.Data.IntegrationTests\xUnitSpike.Data.IntegrationTests.csproj", "{E2AB076C-F812-4B21-AEA4-CC751FCF15A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +93,10 @@ Global
 		{45F550AA-FD8B-4203-BD63-F88D4EBE205F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45F550AA-FD8B-4203-BD63-F88D4EBE205F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45F550AA-FD8B-4203-BD63-F88D4EBE205F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2AB076C-F812-4B21-AEA4-CC751FCF15A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2AB076C-F812-4B21-AEA4-CC751FCF15A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2AB076C-F812-4B21-AEA4-CC751FCF15A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2AB076C-F812-4B21-AEA4-CC751FCF15A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,5 +113,6 @@ Global
 		{DCCC4064-3E2B-4D63-B30A-AB9715F68E72} = {16A47D2B-D992-4D70-B078-9B29F9780FF8}
 		{EC74A59E-5742-480B-9CCC-05EB10185720} = {E502F258-F240-4F76-AA39-B63D702C0A5C}
 		{45F550AA-FD8B-4203-BD63-F88D4EBE205F} = {E502F258-F240-4F76-AA39-B63D702C0A5C}
+		{E2AB076C-F812-4B21-AEA4-CC751FCF15A8} = {48A2D5E9-CDB6-4A82-8956-7B5850A88786}
 	EndGlobalSection
 EndGlobal
