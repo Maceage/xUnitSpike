@@ -57,5 +57,21 @@ namespace xUnitSpike.Services.IntegrationTests
             Firearm createdFirearm = _firearmService.GetByIdentifier(identifier);
             createdFirearm.ShouldBeEquivalentTo(firearm);
         }
+
+        [Fact]
+        public void Delete_WithFirearm_DeletesFirearmFromDatabase()
+        {
+            // Arrange
+            Firearm firearm = Fixture.Create<Firearm>();
+
+            string identifier = _firearmService.Save(firearm);
+            identifier.Should().NotBeNullOrWhiteSpace();
+
+            // Act
+            bool isDeleted = _firearmService.Delete(firearm);
+
+            // Assert
+            isDeleted.Should().BeTrue();
+        }
     }
 }

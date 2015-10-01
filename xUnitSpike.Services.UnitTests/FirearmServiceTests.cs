@@ -77,5 +77,20 @@ namespace xUnitSpike.Services.UnitTests
             // Assert
             actual.Should().Be(expected);
         }
+
+        [Fact]
+        public void Delete_WithFirearm_DeletesFromRepository()
+        {
+            // Arrange
+            Domain.Firearm firearm = Fixture.Create<Domain.Firearm>();
+
+            A.CallTo(() => _firearmRepository.Delete(A<Firearm>._)).Returns(true);
+
+            // Act
+            bool actual = _firearmService.Delete(firearm);
+
+            // Assert
+            actual.Should().BeTrue();
+        }
     }
 }

@@ -38,5 +38,14 @@ namespace xUnitSpike.Data
 
             return firearm.Identifier;
         }
+
+        public bool Delete(Firearm firearm)
+        {
+            var firearmEntity = _firearms.Single(f => f.Identifier == firearm.Identifier);
+
+            _firearms.Remove(firearmEntity);
+
+            return true;
+        }
     }
 }

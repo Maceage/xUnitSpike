@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-using xUnitSpike.Data.Entities;
 using xUnitSpike.Data.Interfaces;
+using xUnitSpike.Domain;
 using xUnitSpike.Services.Interfaces;
 
 namespace xUnitSpike.Services
@@ -15,25 +15,32 @@ namespace xUnitSpike.Services
             _firearmRepository = firearmRepository;
         }
 
-        public IEnumerable<Domain.Firearm> GetAll()
+        public IEnumerable<Firearm> GetAll()
         {
             var firearms = _firearmRepository.GetAll();
 
-            return Mapper.Map<IList<Domain.Firearm>>(firearms);
+            return Mapper.Map<IList<Firearm>>(firearms);
         }
 
-        public Domain.Firearm GetByIdentifier(string identifier)
+        public Firearm GetByIdentifier(string identifier)
         {
             var firearm = _firearmRepository.GetByIdentifier(identifier);
 
-            return Mapper.Map<Domain.Firearm>(firearm);
+            return Mapper.Map<Firearm>(firearm);
         }
 
-        public string Save(Domain.Firearm firearm)
+        public string Save(Firearm firearm)
         {
-            var dataFirearm = Mapper.Map<Firearm>(firearm);
+            var dataFirearm = Mapper.Map<Data.Entities.Firearm>(firearm);
 
             return _firearmRepository.Save(dataFirearm);
+        }
+
+        public bool Delete(Firearm firearm)
+        {
+            var dataFirearm = Mapper.Map<Data.Entities.Firearm>(firearm);
+
+            return _firearmRepository.Delete(dataFirearm);
         }
     }
 }
