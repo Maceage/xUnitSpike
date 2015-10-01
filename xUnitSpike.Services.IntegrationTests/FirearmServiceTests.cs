@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Collections.Generic;
+using FluentAssertions;
 using Microsoft.Practices.Unity;
 using xUnitSpike.Domain;
 using xUnitSpike.Services.Interfaces;
@@ -17,10 +18,20 @@ namespace xUnitSpike.Services.IntegrationTests
         }
 
         [Fact]
+        public void GetAll_WhenCalled_ReturnsAllFirearms()
+        {
+            // Act
+            IEnumerable<Firearm> firearms = _firearmService.GetAll();
+
+            // Assert
+            firearms.Should().NotBeNull();
+        }
+
+        [Fact]
         public void GetByIdentifier_WhenCalled_ReturnsCorrectFirearm()
         {
             // Arrange
-            string identifier = "0123456789";
+            string identifier = "FR0123456789";
 
             // Act
             Firearm firearm = _firearmService.GetByIdentifier(identifier);

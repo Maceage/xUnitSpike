@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using FakeItEasy;
 using FluentAssertions;
 using Ploeh.AutoFixture;
@@ -19,6 +21,24 @@ namespace xUnitSpike.Services.UnitTests
             _firearmRepository = Fixture.Freeze<IFirearmRepository>();
 
             _firearmService = Fixture.Create<FirearmService>();
+        }
+
+        [Fact]
+        public void GetAll_WhenCalled_ReturnsAllFirearms()
+        {
+            // Arrange
+            IQueryable<Firearm> firearms = Fixture.CreateMany<Firearm>().AsQueryable();
+            var expected = Mapper.Map<IEnumerable<Domain.Firearm>>(firearms);
+
+            A.CallTo(() => _firearmRepository.GetAll()).Returns(firearms);
+
+            // Act
+            var actual = _firearmService.GetAll();
+
+            // Assert
+            actual.ShouldAllBeEquivalentTo(expected);
+
+            A.CallTo(() => _firearmRepository.GetAll()).MustHaveHappened();
         }
 
         [Fact]
