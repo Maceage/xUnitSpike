@@ -16,7 +16,7 @@ namespace xUnitSpike
             AutoMapperConfiguration.Configure();
 
             IFirearmService firearmService = unityContainer.Resolve<IFirearmService>();
-            Firearm firearm = firearmService.GetByIdentifier("0123456789");
+            Firearm firearm = firearmService.GetByIdentifier("FR0123456789");
         }
     }
 }
