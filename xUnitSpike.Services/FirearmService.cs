@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
+using xUnitSpike.Data.Entities;
 using xUnitSpike.Data.Interfaces;
 using xUnitSpike.Domain;
 using xUnitSpike.Services.Interfaces;
@@ -29,18 +30,19 @@ namespace xUnitSpike.Services
             return Mapper.Map<Firearm>(firearm);
         }
 
-        public string Save(Firearm firearm)
+        public Firearm Save(Firearm firearm)
         {
-            var dataFirearm = Mapper.Map<Data.Entities.FirearmEntity>(firearm);
+            var firearmData = Mapper.Map<FirearmEntity>(firearm);
+            var savedFirearm = _firearmRepository.Save(firearmData);
 
-            return _firearmRepository.Save(dataFirearm);
+            return Mapper.Map<Firearm>(savedFirearm);
         }
 
         public bool Delete(Firearm firearm)
         {
-            var dataFirearm = Mapper.Map<Data.Entities.FirearmEntity>(firearm);
+            var firearmData = Mapper.Map<FirearmEntity>(firearm);
 
-            return _firearmRepository.Delete(dataFirearm);
+            return _firearmRepository.Delete(firearmData);
         }
     }
 }

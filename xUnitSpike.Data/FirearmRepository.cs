@@ -32,11 +32,11 @@ namespace xUnitSpike.Data
             return _firearms.Single(f => f.Identifier == identifier);
         }
 
-        public string Save(FirearmEntity firearmEntity)
+        public FirearmEntity Save(FirearmEntity firearmEntity)
         {
             _firearms.Add(firearmEntity);
 
-            return firearmEntity.Identifier;
+            return firearmEntity;
         }
 
         public bool Delete(FirearmEntity firearmEntity)

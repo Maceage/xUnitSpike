@@ -48,13 +48,13 @@ namespace xUnitSpike.Services.IntegrationTests
             Firearm firearm = Fixture.Create<Firearm>();
 
             // Act
-            string identifier = _firearmService.Save(firearm);
+            Firearm savedFirearm = _firearmService.Save(firearm);
 
             // Assert
-            identifier.Should().NotBeNullOrWhiteSpace();
-            identifier.Should().Be(firearm.Identifier);
+            savedFirearm.Identifier.Should().NotBeNullOrWhiteSpace();
+            savedFirearm.Identifier.Should().Be(firearm.Identifier);
 
-            Firearm createdFirearm = _firearmService.GetByIdentifier(identifier);
+            Firearm createdFirearm = _firearmService.GetByIdentifier(savedFirearm.Identifier);
             createdFirearm.ShouldBeEquivalentTo(firearm);
         }
 
@@ -64,8 +64,8 @@ namespace xUnitSpike.Services.IntegrationTests
             // Arrange
             Firearm firearm = Fixture.Create<Firearm>();
 
-            string identifier = _firearmService.Save(firearm);
-            identifier.Should().NotBeNullOrWhiteSpace();
+            Firearm savedFirearm = _firearmService.Save(firearm);
+            savedFirearm.Identifier.Should().NotBeNullOrWhiteSpace();
 
             // Act
             bool isDeleted = _firearmService.Delete(firearm);

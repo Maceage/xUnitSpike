@@ -6,6 +6,7 @@ using FluentAssertions;
 using Ploeh.AutoFixture;
 using xUnitSpike.Data.Entities;
 using xUnitSpike.Data.Interfaces;
+using xUnitSpike.Domain;
 using xUnitSpike.Tests;
 using Xunit;
 
@@ -28,7 +29,7 @@ namespace xUnitSpike.Services.UnitTests
         {
             // Arrange
             IQueryable<FirearmEntity> firearms = Fixture.CreateMany<FirearmEntity>().AsQueryable();
-            var expected = Mapper.Map<IEnumerable<Domain.Firearm>>(firearms);
+            var expected = Mapper.Map<IEnumerable<Firearm>>(firearms);
 
             A.CallTo(() => _firearmRepository.GetAll()).Returns(firearms);
 
@@ -48,7 +49,7 @@ namespace xUnitSpike.Services.UnitTests
             string identifier = Fixture.Create<string>();
 
             FirearmEntity firearmEntity = Fixture.Create<FirearmEntity>();
-            var expected = Mapper.Map<Domain.Firearm>(firearmEntity);
+            var expected = Mapper.Map<Firearm>(firearmEntity);
 
             A.CallTo(() => _firearmRepository.GetByIdentifier(A<string>.That.IsEqualTo(identifier))).ReturnsLazily(f => firearmEntity);
 
@@ -65,24 +66,23 @@ namespace xUnitSpike.Services.UnitTests
         public void Save_WithFirearm_SavesToRepository()
         {
             // Arrange
-            string expected = Fixture.Create<string>();
+            FirearmEntity firearmEntity = Fixture.Create<FirearmEntity>();
+            Firearm expected = Mapper.Map<Firearm>(firearmEntity);
 
-            Domain.Firearm firearm = Fixture.Create<Domain.Firearm>();
-
-            A.CallTo(() => _firearmRepository.Save(A<FirearmEntity>._)).Returns(expected);
+            A.CallTo(() => _firearmRepository.Save(A<FirearmEntity>._)).Returns(firearmEntity);
 
             // Act
-            string actual = _firearmService.Save(firearm);
+            Firearm actual = _firearmService.Save(expected);
 
             // Assert
-            actual.Should().Be(expected);
+            actual.ShouldBeEquivalentTo(expected);
         }
 
         [Fact]
         public void Delete_WithFirearm_DeletesFromRepository()
         {
             // Arrange
-            Domain.Firearm firearm = Fixture.Create<Domain.Firearm>();
+            Firearm firearm = Fixture.Create<Firearm>();
 
             A.CallTo(() => _firearmRepository.Delete(A<FirearmEntity>._)).Returns(true);
 

@@ -8,7 +8,7 @@ namespace xUnitSpike.Data.Interfaces
         IQueryable<FirearmEntity> GetAll();
         FirearmEntity GetByIdentifier(string identifier);
 
-        string Save(FirearmEntity firearmEntity);
+        FirearmEntity Save(FirearmEntity firearmEntity);
 
         bool Delete(FirearmEntity firearmEntity);
     }
